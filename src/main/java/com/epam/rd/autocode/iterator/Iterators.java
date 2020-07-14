@@ -16,10 +16,6 @@ class Iterators {
         throw new UnsupportedOperationException();
         }
 
-    public static Iterator<String> wordIterator(String text){
-        throw new UnsupportedOperationException();
-    }
-
     public static Iterable<String> table(String[] columns, int[] rows){
         throw new UnsupportedOperationException();
     }
