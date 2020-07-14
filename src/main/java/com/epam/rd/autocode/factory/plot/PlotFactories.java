@@ -1,6 +1,4 @@
-import com.epam.rd.autocode.factory.plot.Character;
-import com.epam.rd.autocode.factory.plot.EpicCrisis;
-import com.epam.rd.autocode.factory.plot.PlotFactory;
+package com.epam.rd.autocode.factory.plot;
 
 class PlotFactories {
 
