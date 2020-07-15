@@ -1,49 +1,57 @@
-# Employees. Service.
+# Design Patterns
 
-## Description 
-Implement [`com.epam.rd.autocode.service.ServiceFactory`](src/main/java/com/epam/rd/autocode/service/ServiceFactory.java) method.
+## Decorator
+**Decorator** is a structural design pattern that lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors.
 
-It should return an Employee service instance.
+Implement [`com.epam.rd.autocode.decorator.Decorators`](src\main\java\com\epam\rd\autocode\decorator\Decorators.java) method:
+- `evenIndexElementsSubList` - return a decorator, that manages only elements with even indices in a source list.
+    Decorated list should support "read" methods: `get()`, `size()`, `iterator()`.
+    
+## Factory
+**Abstract Factory** is a creational design pattern that lets you produce families of related objects without specifying their concrete classes.
 
+Implement [`com.epam.rd.autocode.factory.plot.PlotFactories`](src\main\java\com\epam\rd\autocode\factory\plot\PlotFactories.java) methods:
+- `classicDisneyPlotFactory` - return a factory that creates a classic Disney plot (refer to test cases).
+- `contemporaryDisneyPlotFactory` - return a factory that creates a contemporary Disney plot (refer to test cases).
+- `marvelPlotFactory` - return a factory that creates a Marvel plot (refer to test cases).
+    
+## Iterator
+**Iterator** is a behavioral design pattern that lets you traverse elements of a collection without exposing its underlying representation.
 
-You may refer to DDL in [`init-ddl.sql`](src/main/resources/init-ddl.sql).
+Implement [`com.epam.rd.autocode.iterator.Iterators`](src\main\java\com\epam\rd\autocode\iterator\Iterators.java) methods:
+- `intArrayTwoTimesIterator` - return an Iterator that iterates over given array but returns each array element 2 times.
+- `intArrayThreeTimesIterator` - return an Iterator that iterates over given array but returns each array element 3 times.
+- `intArrayFiveTimesIterator` - return an Iterator that iterates over given array but returns each array element 5 times.
+- `table` - return an Iterator that iterates over cells - pairs of given columns and rows.
+    
+## Observer
+**Observer** is a behavioral design pattern that lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they’re observing.
 
-You may not change classes in `com.epam.rd.autocode.domain` package.
+Implement [`com.epam.rd.autocode.observer.git.GitRepoObservers`](src\main\java\com\epam\rd\autocode\observer\git\GitRepoObservers.java) methods:
+- `newRepository` - return a Repository. It supports commits to various branches and merges between branches.
+Also, it supports WebHooks - observers that observes commit or merge events.
+- `mergeToBranchWebHook` - return a WebHook that observes merge events for a target branch.
+- `commitToBranchWebHook` - return a WebHook that observes commit events for a target branch.    
 
-Services often performs as a layer between DAO and controllers as it is suggested by classical 3-layer architecture design.
-Although main function of a Service is considered to be a provision of business logic so mature architecture approaches like Clean Architecture, DDD specifies that a Service should not depend on persistence layer. 
-So one may consider an Employee Service you need to implement to be really a Repository approach. 
+## Strategy
+**Strategy** is a behavioral design pattern that lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.
 
-Anyway, you should implement EmployeeService interface.
+*CardDealingStrategy* is a strategy of dealing cards for a card game.
+Each game defines how many cards should be dealt to a player and what additional card stacks should be dealt as well.
 
-**Important**: Usually you have to provide an employee as an object of Employee class, having injected Department object and injected Employee object referencing to his manager.
-Object of a manager should be having injected Department as well, but his own manager should not be injected.
-Trying to show it in graphical way:
-```
-employee
-    |-department
-    |-manager
-        |-department
-```
+Result of it is a Map containing named card stacks (as Lists).
+Each player stack has a name by its number: "Player 1", "Player 2", ...
+Additional stacks varies from game to game.
+The rest of the card deck becomes a "Remaining" stack.
 
-Though, implementation of `getWithDepartmentAndFullManagerChain` method requires extracting of an employee with full management chain 
-meaning that it should have a manager who should have a manager who should have a manager and so on up to top manager.
-So, it will look like:
-```
-employee
-    |-department
-    |-manager
-        |-department
-        |-manager
-            |-department
-            |-manager
-                |-department
-                |-manager
-                    |-department
-                    |-manager
-                        ...
-```
+Note, at first, cards are dealt to players, one per round and then cards are dealt to additional stacks and the remaining deck becomes a "Remaining" stack.
 
-You may not change classes in `com.epam.rd.autocode.domain` package.
-
- 
+Implement [`com.epam.rd.autocode.startegy.cards.CardDealingStrategies`](src\main\java\com\epam\rd\autocode\startegy\cards\CardDealingStrategies.java) methods:
+- `texasHoldemCardDealingStrategy` - return a CardDealingStrategy for Texas Hold'em Poker.
+2 cards per player, 5 cards in additional "Community" stack.
+- `classicPokerCardDealingStrategy` - return a CardDealingStrategy for Classic Poker.
+5 cards per player, no additional stacks.
+- `bridgeCardDealingStrategy` - return a CardDealingStrategy for Bridge.
+13 cards per player, no additional stacks. 
+- `foolCardDealingStrategy` - return a CardDealingStrategy for Fool.
+6 cards per player, 1 card in additional "Trump card" stack.
