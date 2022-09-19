@@ -54,6 +54,15 @@ public class Event {
 
     @Override
     public String toString() {
+
+        if (Objects.equals(type, Type.MERGE)){
+            return new StringJoiner(", ", Event.class.getSimpleName() + "[", "]")
+                    .add(type.toString())
+                    .add(branch)
+                    .add(commits.toString())
+                    .toString();
+        }
+
         return new StringJoiner(", ", Event.class.getSimpleName() + "[", "]")
                 .add(type.toString())
                 .add(branch)
@@ -61,3 +70,4 @@ public class Event {
                 .toString();
     }
 }
+
