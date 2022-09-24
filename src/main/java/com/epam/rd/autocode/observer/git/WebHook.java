@@ -7,4 +7,6 @@ public interface WebHook {
     Event.Type type();
     List<Event> caughtEvents();
     void onEvent(Event event);
+
+    String toString();
 }
