@@ -15,8 +15,6 @@ Implement [`com.epam.rd.autocode.decorator.Decorators`](src\main\java\com\epam\r
 
 Implement [`com.epam.rd.autocode.factory.plot.PlotFactories`](src\main\java\com\epam\rd\autocode\factory\plot\PlotFactories.java) methods:
 - `classicDisneyPlotFactory` - returns a factory that creates a classic Disney plot (refer to test cases).
-- `contemporaryDisneyPlotFactory` - returns a factory that creates a contemporary Disney plot (refer to test cases).
-- `marvelPlotFactory` - returns a factory that creates a Marvel plot (refer to test cases).
     
 ## Iterator
 **Iterator** is a behavioral design pattern that lets you traverse elements of a collection without exposing its underlying representation.
